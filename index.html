@@ -69,12 +69,13 @@
   |
 @@@
 type: { text: "setTimeout(function() {\n" } ::: Typing code
-run: { command: "indentAuto" }
+run: { command: "indentAuto", beforeDelay: 0 }
 type: { text: "alert('Inside setTimeout');\n" }
-run: { command: "indentLess" }
-type: { text: "}, 1000);" }
+run: { command: "indentLess", beforeDelay: 0 }
+type: { text: "}, 1000);\n" }
+run: { command: "indentAuto", beforeDelay: 0 }
 type: { text: "alert('Outside setTimeout');" }
-tooltip: { text: "the setTimeout function is called", pos: {x:0,y:5}, wait: 3000 }
+tooltip: { text: "the setTimeout function is called", pos: "0:5", wait: 3000 }
 wait: 3000
 tooltip: Which alert is executed first ? ::: Question
 wait: 5000
