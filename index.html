@@ -51,7 +51,14 @@
                 </div>
             </div>
 
-            <div class="step" id="definitions" data-x="1000" data-y="0">
+            <div class="step" id="the-problem-1" data-x="1500" data-y="0">
+                <h2>The problem (1/2)</h2>
+                <p>Code writing (in editor) and code execution (in time) have a one-one relation in synchronous (blocking) languages.</p>
+                <p>The coder expects its code to be executed in the same order it's written.</p>
+                <p><strong>No longer true in asynchronous code.</strong></p>
+            </div>
+
+            <div class="step" id="definitions" data-x="3000" data-y="0">
                 <h2>Definitions</h2>
                 <dl>
                     <dt>High-order functions:</dt>
@@ -63,29 +70,98 @@
                 </dl>
             </div>
 
-            <div intro="async-callback" class="step" data-x="2000" data-y="0">
+            <div intro="async-callback" class="step" data-x="4500" data-y="0">
                 <h2>The classical async example</h2>
+                <hr>
+                <div class="row">
+                    <div class="columns small-12">
+                        <button id='play-async-callback'>Play</button>
+                    </div>
+                </div>
 <textarea name="test" data-cm-mode="text/javascript" id="async-callback-code" cols="100" rows="30">
   |
 @@@
-type: { text: "setTimeout(function() {\n" } ::: Typing code
+type: { text: "setTimeout(function() {\n\n" } ::: Typing code
+
 run: { command: "indentAuto", beforeDelay: 0 }
-type: { text: "alert('Inside setTimeout');\n" }
+
+type: { text: "alert('Inside setTimeout');\n\n" }
+
 run: { command: "indentLess", beforeDelay: 0 }
-type: { text: "}, 1000);\n" }
+
+type: { text: "}, 1000);\n\n" }
+
 run: { command: "indentAuto", beforeDelay: 0 }
+
 type: { text: "alert('Outside setTimeout');" }
-tooltip: { text: "the setTimeout function is called", pos: "0:5", wait: 3000 }
-wait: 3000
-tooltip: Which alert is executed first ? ::: Question
-wait: 5000
-prompt: The outside one, of course
+
+wait: 4000
+
+prompt: { text: "Which alert is executed first ?", title: "Question", hideDelay: 4000 } ::: Question
+
+wait: 1000
+
+tooltip: { text: "The setTimeout function is called", pos: "0:5", wait: 4000 } ::: Code analysis
+
+wait: 1000
+
+tooltip : { text: "A callback function passed to setTimeout", pos: "0:15", wait: 4000 }
+
+wait: 1000
+
+tooltip: { text: "The callback should execute this...", pos: "2:4", wait: 4000 }
+
+wait: 1000
+
+tooltip: { text: "... after 1 second", pos: "4:5", wait: 4000 }
+
+wait: 1000
+
+prompt: The outside one, of course ::: Answer
 </textarea>
 
-                <button id='play-async-callback'>Play</button>
             </div>
 
-        </div>
+            <div class="step" id="callback-pyramid" data-x="6000" data-y="0">
+                <h2>The callbacks pyramid</h2>
+                <hr>
+                <button id='play-callback-pyramid'>Play</button>
+<textarea name="test" data-cm-mode="text/javascript" id="callback-pyramid-code" cols="100" rows="30">
+  |
+@@@
+type: { text: "doSomeRequest(url, function(err, response) {\n" } ::: Typing code
+run: { command: "indentAuto", beforeDelay: 0 }
+type: { text: "if (err) throw(err); // Custom error management\n" }
+run: { command: "indentAuto", beforeDelay: 0 }
+type: { text: "var coolerResponse = process(response);\n" }
+run: { command: "indentAuto", beforeDelay: 0 }
+type: { text: "save(coolerResponse, db, function(err, dbResponse) {\n" }
+run: { command: "indentAuto", beforeDelay: 0 }
+type: { text: "if (err) throw(new Error('shit not saved'));\n" }
+run: { command: "indentAuto", beforeDelay: 0 }
+type: { text: "doSomethingElse(dbResponse, function(err, results) {\n" }
+run: { command: "indentAuto", beforeDelay: 0 }
+type: { text: "if (err) throw(new Error('Lost'));\n" }
+run: { command: "indentAuto", beforeDelay: 0 }
+type: { text: "/* Continue till you reach right side of screen ... */\n" }
+run: { command: "indentAuto", beforeDelay: 0 }
+type: { text: "});\n"}
+run: { command: "indentAuto", beforeDelay: 0 }
+type: { text: "});\n" }
+run: { command: "indentAuto", beforeDelay: 0 }
+type: { text: "});\n\n" }
+run: { command: "indentAuto", beforeDelay: 0 }
+type: { text: "// Can't use this part of code" }
+</textarea>
+
+            </div>
+<!-- Angulars.js == async.auto -->
+            <div class="step" id="the-problem-2" data-x="7500" data-y="0">
+                <h2>The problem (2/2)</h2>
+
+            </div>
+
+        </div> <!-- #impress -->
 
         <script src="scripts/vendor/impress.js"></script>
         <script src="scripts/main.js"></script>
