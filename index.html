@@ -38,12 +38,13 @@
                         <h2>Async.js</h2>
                     </div>
                     <div class="columns small-12">
-                        <h2 class="subheader">aka "How to avoid callback pyramid and organise async code ?"</h2>
+                        <h2 class="subheader">aka "How to free yourself from the callbacks pyramid and organise async code ?"</h2>
                     </div>
                     <div class="columns small-4 small-offset-8">
                         <ul class="vcard">
                             <li class="fn">Khalid Jebbari</li>
                             <li>Paris.js #28</li>
+                            <li>March 27<sup>th</sup>, 2013</li>
                             <li class="email"><a href="https://twitter.com/Dj3bbZ">@Dj3bbZ</a></li>
                         </ul>
                     </div>
@@ -63,17 +64,22 @@
             </div>
 
             <div intro="async-callback" class="step" data-x="2000" data-y="0">
-                <textarea name="test" id="async-callback-code" cols="100" rows="30">
-                  |
-                @@@
-                type: setTimeout(function() {
-                jumpTo: 1:2
-                type: alert('Inside setTimeout');
-                jumpTo: 2:0
-                type: }, 1000);
-                jumpTo: 3:0
-                type: alert('Outside setTimeout');
-                </textarea>
+                <h2>The classical async example</h2>
+<textarea name="test" data-cm-mode="text/javascript" id="async-callback-code" cols="100" rows="30">
+  |
+@@@
+type: { text: "setTimeout(function() {\n" } ::: Typing code
+run: { command: "indentAuto" }
+type: { text: "alert('Inside setTimeout');\n" }
+run: { command: "indentLess" }
+type: { text: "}, 1000);" }
+type: { text: "alert('Outside setTimeout');" }
+tooltip: { text: "the setTimeout function is called", pos: {x:0,y:5}, wait: 3000 }
+wait: 3000
+tooltip: Which alert is executed first ? ::: Question
+wait: 5000
+prompt: The outside one, of course
+</textarea>
 
                 <button id='play-async-callback'>Play</button>
             </div>

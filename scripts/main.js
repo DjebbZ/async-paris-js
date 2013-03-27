@@ -1,6 +1,6 @@
 (function() {
 
-  // impress().init();
+  impress().init();
 
   // var testTextArea = document.getElementById('test');
   var movie = CodeMirror.movie('async-callback-code');
