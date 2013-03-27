@@ -1,0 +1,20 @@
+/*
+ * Impress styles
+ */
+
+
+.impress-supported .fallback-message {
+  display: none;
+}
+
+.step {
+  width: 800px;
+}
+
+/*
+ * Slides specific
+ */
+
+.step:first-child .subheader {
+  text-align: center;
+}

@@ -14,27 +14,73 @@
         <link rel="stylesheet" href="styles/foundation.css">
         <link rel="stylesheet" href="styles/codemirror.css">
         <link rel="stylesheet" href="styles/cm-movie.css">
+        <link rel="stylesheet" href="styles/main.css">
 
         <script src="scripts/vendor/custom.modernizr.js"></script>
         <script src="scripts/vendor/codemirror.js"></script>
         <script src="scripts/vendor/javascript.js"></script>
         <script src="scripts/vendor/cm-movie-full.js"></script>
     </head>
-    <body>
+    <body class="impress-not-supported">
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
+        <div class="fallback-message">
+            <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+            <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser, and <strong>activate Javascript</strong></p>
+        </div>
 
-        <textarea name="test" id="test" cols="100" rows="30">
-          |
-        @@@
-        type: Hello world ::: Typing "Hello World"
-        wait: 1000
-        type: I miss you ::: I miss you
-        </textarea>
+        <div id="impress">
 
-        <button id='play'>Play</button>
+            <div class="step" id="intro" data-x="0" data-y="0">
+                <div class="row">
+                    <div class="columns small-4 small-centered">
+                        <h2>Async.js</h2>
+                    </div>
+                    <div class="columns small-12">
+                        <h2 class="subheader">aka "How to avoid callback pyramid and organise async code ?"</h2>
+                    </div>
+                    <div class="columns small-4 small-offset-8">
+                        <ul class="vcard">
+                            <li class="fn">Khalid Jebbari</li>
+                            <li>Paris.js #28</li>
+                            <li class="email"><a href="https://twitter.com/Dj3bbZ">@Dj3bbZ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
+            <div class="step" id="definitions" data-x="1000" data-y="0">
+                <h2>Definitions</h2>
+                <dl>
+                    <dt>High-order functions:</dt>
+                    <dd>Functions as first-class citizens. Functions are variables like any other.</dd>
+                    <dt>Callbacks :</dt>
+                    <dd><blockquote>A reference to executable code, or a piece of executable code, that is passed as an argument to other code. <cite><a href="http://en.wikipedia.org/wiki/Callback_(computer_programming)">Wikipedia</a></cite> </blockquote></dd>
+                    <dt>Asynchronous callbacks :</dt>
+                    <dd><blockquote>Deferred callbacks are often used in the context of I/O operations or event handling. <cite><a href="http://en.wikipedia.org/wiki/Callback_(computer_programming)">Wikipedia</a></cite> </blockquote></dd>
+                </dl>
+            </div>
+
+            <div intro="async-callback" class="step" data-x="2000" data-y="0">
+                <textarea name="test" id="async-callback-code" cols="100" rows="30">
+                  |
+                @@@
+                type: setTimeout(function() {
+                jumpTo: 1:2
+                type: alert('Inside setTimeout');
+                jumpTo: 2:0
+                type: }, 1000);
+                jumpTo: 3:0
+                type: alert('Outside setTimeout');
+                </textarea>
+
+                <button id='play-async-callback'>Play</button>
+            </div>
+
+        </div>
+
+        <script src="scripts/vendor/impress.js"></script>
         <script src="scripts/main.js"></script>
     </body>
 </html>
