@@ -1,3 +1,7 @@
+p, ul, li, dl, dt, dd, blockquote {
+  font-size: 1.2em;
+}
+
 /*
  * Code Mirror Movies
  */
