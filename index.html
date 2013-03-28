@@ -75,10 +75,10 @@
                 <hr>
                 <div class="row">
                     <div class="columns small-12">
-                        <button id='play-async-callback'>Play</button>
+                        <button id='async-callback-button'>Play</button>
                     </div>
                 </div>
-<textarea name="test" data-cm-mode="text/javascript" id="async-callback-code" cols="100" rows="30">
+<textarea name="async-callback-movie" data-cm-mode="text/javascript" id="async-callback-movie" cols="100" rows="30">
   |
 @@@
 type: { text: "setTimeout(function() {\n\n" } ::: Typing code
@@ -122,35 +122,57 @@ prompt: The outside one, of course ::: Answer
 
             </div>
 
-            <div class="step" id="callback-pyramid" data-x="6000" data-y="0">
+            <div class="step" id="callbacks-pyramid" data-x="6000" data-y="0">
                 <h2>The callbacks pyramid</h2>
                 <hr>
-                <button id='play-callback-pyramid'>Play</button>
-<textarea name="test" data-cm-mode="text/javascript" id="callback-pyramid-code" cols="100" rows="30">
+                <button id='callbacks-pyramid-button'>Play</button>
+<textarea name="callbacks-pyramid-movie" data-cm-mode="text/javascript" id="callbacks-pyramid-movie" cols="100" rows="30">
   |
 @@@
 type: { text: "doSomeRequest(url, function(err, response) {\n" } ::: Typing code
+
 run: { command: "indentAuto", beforeDelay: 0 }
+
 type: { text: "if (err) throw(err); // Custom error management\n" }
+
 run: { command: "indentAuto", beforeDelay: 0 }
+
 type: { text: "var coolerResponse = process(response);\n" }
+
 run: { command: "indentAuto", beforeDelay: 0 }
+
 type: { text: "save(coolerResponse, db, function(err, dbResponse) {\n" }
+
 run: { command: "indentAuto", beforeDelay: 0 }
+
 type: { text: "if (err) throw(new Error('shit not saved'));\n" }
+
 run: { command: "indentAuto", beforeDelay: 0 }
+
 type: { text: "doSomethingElse(dbResponse, function(err, results) {\n" }
+
 run: { command: "indentAuto", beforeDelay: 0 }
+
 type: { text: "if (err) throw(new Error('Lost'));\n" }
+
 run: { command: "indentAuto", beforeDelay: 0 }
+
 type: { text: "/* Continue till you reach right side of screen ... */\n" }
+
 run: { command: "indentAuto", beforeDelay: 0 }
+
 type: { text: "});\n"}
+
 run: { command: "indentAuto", beforeDelay: 0 }
+
 type: { text: "});\n" }
+
 run: { command: "indentAuto", beforeDelay: 0 }
+
 type: { text: "});\n\n" }
+
 run: { command: "indentAuto", beforeDelay: 0 }
+
 type: { text: "// Can't use this part of code" }
 </textarea>
 

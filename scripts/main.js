@@ -2,22 +2,27 @@
 
   impress().init();
 
-  // var testTextArea = document.getElementById('test');
-  var movie = CodeMirror.movie('async-callback-code');
-  // movie.play();
+  _([
+    'async-callback',
+    'callback-pyramid'
+  ]).forEach(function(step) {
 
-  var button = document.getElementById('play-async-callback');
-  button.addEventListener('click', function() {
-    if (movie.state() === 'play') {
-      movie.pause();
-      this.innerHTML = 'Play';
-    } else {
-      movie.play();
-      this.innerHTML = 'Pause';
-    }
-  });
+    var movie = CodeMirror.movie(step + '-movie'),
+        button = document.getElementById(step + '-button');
 
-  movie.on('stop', function() {
-    button.innerHTML = 'Play';
+    button.addEventListener('click', function() {
+      if (movie.state() === 'play') {
+        movie.pause();
+        this.innerHTML = 'Play';
+      } else {
+        movie.play();
+        this.innerHTML = 'Pause';
+      }
+    });
+
+    movie.on('stop', function() {
+      button.innerHTML = 'Play';
+    });
+
   });
 })();
