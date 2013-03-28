@@ -1,7 +1,16 @@
 /*
- * Impress styles
+ * Code Mirror Movies
  */
 
+.CodeMirror-tooltip {
+  font-size: 20px;
+}
+
+
+
+/*
+ * Impress global
+ */
 
 .impress-supported .fallback-message {
   display: none;
@@ -10,6 +19,8 @@
 .step {
   width: 1000px;
 }
+
+
 
 /*
  * Slides specific
