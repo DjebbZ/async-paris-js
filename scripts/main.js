@@ -6,7 +6,9 @@
   // Setup behavior for code movies
   _([
     'async-callback',
-    'callbacks-pyramid'
+    'callbacks-pyramid',
+    'each',
+    'map'
   ]).forEach(function(step) {
 
     var movie = CodeMirror.movie(step + '-movie'),
@@ -14,15 +16,17 @@
         execBtn = document.getElementById(step + '-exec');
 
     // Play button behavior
-    playBtn.addEventListener('click', function() {
-      if (movie.state() === 'play') {
-        movie.pause();
-        this.innerHTML = 'Play';
-      } else {
-        movie.play();
-        this.innerHTML = 'Pause';
-      }
-    });
+    if (playBtn) {
+      playBtn.addEventListener('click', function() {
+        if (movie.state() === 'play') {
+          movie.pause();
+          this.innerHTML = 'Play';
+        } else {
+          movie.play();
+          this.innerHTML = 'Pause';
+        }
+      });
+    }
 
     movie.on('stop', function() {
       button.innerHTML = 'Play';
