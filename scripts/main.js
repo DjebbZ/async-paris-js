@@ -4,7 +4,7 @@
 
   _([
     'async-callback',
-    'callback-pyramid'
+    'callbacks-pyramid'
   ]).forEach(function(step) {
 
     var movie = CodeMirror.movie(step + '-movie'),
