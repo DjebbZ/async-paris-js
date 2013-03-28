@@ -35,7 +35,7 @@
             <div class="step" id="intro" data-x="0" data-y="0">
                 <div class="row">
                     <div class="columns small-4 small-centered">
-                        <h2>Async.js</h2>
+                        <h2>async.js</h2>
                     </div>
                     <div class="columns small-12">
                         <h2 class="subheader">aka "How to free yourself from the callbacks pyramid and organise async code ?"</h2>
@@ -75,7 +75,8 @@
                 <hr>
                 <div class="row">
                     <div class="columns small-12">
-                        <button id='async-callback-button'>Play</button>
+                        <button class="button small radius success" id='async-callback-button'>Play</button>
+                        <button class="button small radius" id="async-callback-exec">Execute</button>
                     </div>
                 </div>
 <textarea name="async-callback-movie" data-cm-mode="text/javascript" id="async-callback-movie" cols="100" rows="30">
@@ -114,10 +115,6 @@ tooltip: { text: "The callback should execute this...", pos: "2:4", wait: 4000 }
 wait: 1000
 
 tooltip: { text: "... after 1 second", pos: "4:5", wait: 4000 }
-
-wait: 1000
-
-prompt: The outside one, of course ::: Answer
 </textarea>
 
             </div>
@@ -126,54 +123,54 @@ prompt: The outside one, of course ::: Answer
                 <img src="images/how-return-value-callback.jpg" alt="But then how do I return the value ? - With a callback." width='625' height="1039">
             </div>
 
-            <div class="step" id="callbacks-pyramid" data-x="75000" data-y="0">
+            <div class="step" id="callbacks-pyramid" data-x="7500" data-y="0">
                 <h2>The callbacks pyramid</h2>
                 <hr>
-                <button id='callbacks-pyramid-button'>Play</button>
+                <button class="button small radius success" id='callbacks-pyramid-button'>Play</button>
 <textarea name="callbacks-pyramid-movie" data-cm-mode="text/javascript" id="callbacks-pyramid-movie" cols="100" rows="30">
   |
 @@@
-type: { text: "doSomeRequest(url, function(err, response) {\n" } ::: Typing code
+type: { text: "ajaxRequest(url, function(err, response) {\n\n" } ::: Typing code
 
 run: { command: "indentAuto", beforeDelay: 0 }
 
-type: { text: "if (err) throw(err); // Custom error management\n" }
+type: { text: "if (err) throw(err); // Custom error management\n\n" }
 
 run: { command: "indentAuto", beforeDelay: 0 }
 
-type: { text: "var coolerResponse = process(response);\n" }
+type: { text: "var coolResponse = process(response);\n\n" }
 
 run: { command: "indentAuto", beforeDelay: 0 }
 
-type: { text: "save(coolerResponse, db, function(err, dbResponse) {\n" }
+type: { text: "saveSomewhere(coolResponse, function(err, dbHandler) {\n\n" }
 
 run: { command: "indentAuto", beforeDelay: 0 }
 
-type: { text: "if (err) throw(new Error('shit not saved'));\n" }
+type: { text: "if (err) throw(new Error('shit not saved'));\n\n" }
 
 run: { command: "indentAuto", beforeDelay: 0 }
 
-type: { text: "doSomethingElse(dbResponse, function(err, results) {\n" }
+type: { text: "dbHandler.getSomeData(condition, function(err, results) {\n\n" }
 
 run: { command: "indentAuto", beforeDelay: 0 }
 
-type: { text: "if (err) throw(new Error('Lost'));\n" }
+type: { text: "if (err) throw(new Error('Lost'));\n\n" }
 
 run: { command: "indentAuto", beforeDelay: 0 }
 
-type: { text: "/* Continue till you reach right side of screen ... */\n" }
+type: { text: "/* Continue till you reach right side of screen ... */\n\n" }
 
 run: { command: "indentAuto", beforeDelay: 0 }
 
-type: { text: "});\n"}
-
-run: { command: "indentAuto", beforeDelay: 0 }
-
-type: { text: "});\n" }
+type: { text: "});\n\n"}
 
 run: { command: "indentAuto", beforeDelay: 0 }
 
 type: { text: "});\n\n" }
+
+run: { command: "indentAuto", beforeDelay: 0 }
+
+type: { text: "});\n\n\n" }
 
 run: { command: "indentAuto", beforeDelay: 0 }
 
@@ -184,7 +181,22 @@ type: { text: "// Can't use this part of code" }
 <!-- Angulars.js == async.auto -->
             <div class="step" id="the-problem-2" data-x="9000" data-y="0">
                 <h2>The problem (2/2)</h2>
+                <ul>
+                    <li>Prisoner of the callbacks</li>
+                    <li>Code flow derived from 1:1 between code/execution</li>
+                    <li>Human is used to read code in one plan</li>
+                </ul>
+            </div>
 
+            <div class="step" id="async-to-the-rescue" data-x="10500" data-y="0">
+                <div class="row">
+                    <div class="columns small-12 small-centered">
+                        <h2>async.js to the rescue</h2>
+                    </div>
+                    <div class="columns small-12">
+                        <h3>The toolbox to manage any asynchronous code flow</h3>
+                    </div>
+                </div>
             </div>
 
         </div> <!-- #impress -->
