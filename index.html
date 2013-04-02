@@ -56,7 +56,7 @@
                 <h2>The problem (1/2)</h2>
                 <p>Code writing (in editor) and code execution (in time) have a one-one relation in synchronous (blocking) languages.</p>
                 <p>The coder expects its code to be executed in the same order it's written.</p>
-                <p><strong>No longer true in asynchronous code.</strong></p>
+                <h3>No longer true in asynchronous code.</h3>
             </div>
 
             <div class="step" id="why-so-asynchronous" data-x="3000" data-y="0">
@@ -66,12 +66,14 @@
             <div class="step" id="definitions" data-x="4500" data-y="0">
                 <h2>Definitions</h2>
                 <dl>
-                    <dt>High-order functions:</dt>
-                    <dd>Functions as first-class citizens. Functions are variables like any other.</dd>
-                    <dt>Callbacks :</dt>
-                    <dd><blockquote>A reference to executable code, or a piece of executable code, that is passed as an argument to other code. <cite><a href="http://en.wikipedia.org/wiki/Callback_(computer_programming)">Wikipedia</a></cite> </blockquote></dd>
-                    <dt>Asynchronous callbacks :</dt>
-                    <dd><blockquote>Deferred callbacks are often used in the context of I/O operations or event handling. <cite><a href="http://en.wikipedia.org/wiki/Callback_(computer_programming)">Wikipedia</a></cite> </blockquote></dd>
+                    <dt>High-order function:</dt>
+                    <dd>Function that takes anothter function as a parameter.</dd>
+                    <dt>Callback :</dt>
+                    <dd>Function that is passed to another function.
+                        <blockquote>A reference to executable code, or a piece of executable code, that is passed as an argument to other code. <cite><a href="http://en.wikipedia.org/wiki/Callback_(computer_programming)">Wikipedia</a></cite> </blockquote></dd>
+                    <dt>Asynchronous callback :</dt>
+                    <dd>Callback that will be executed later.
+                        <blockquote>Deferred callbacks are often used in the context of I/O operations or event handling. <cite><a href="http://en.wikipedia.org/wiki/Callback_(computer_programming)">Wikipedia</a></cite> </blockquote></dd>
                 </dl>
             </div>
 
@@ -80,11 +82,11 @@
                 <hr>
                 <div class="row">
                     <div class="columns small-12">
-                        <button class="button small radius success" id='async-callback-button'>Play</button>
-                        <button class="button small radius" id="async-callback-exec">Execute</button>
+                        <button class="button radius success" id='async-callback-button'>Play</button>
+                        <button class="button radius" id="async-callback-exec">Execute</button>
                     </div>
                 </div>
-<textarea name="async-callback-movie" data-cm-mode="text/javascript" id="async-callback-movie" cols="100" rows="30">
+<textarea data-cm-theme="solarized" name="async-callback-movie" data-cm-mode="text/javascript" id="async-callback-movie" cols="100" rows="30">
   |
 @@@
 type: { text: "setTimeout(function() {\n\n" } ::: Typing code
@@ -101,25 +103,24 @@ run: { command: "indentAuto", beforeDelay: 0 }
 
 type: { text: "alert('Outside setTimeout');" }
 
-wait: 4000
+wait: 3000
 
-prompt: { text: "Which alert is executed first ?", title: "Question", hideDelay: 4000 } ::: Question
+prompt: { text: "Which alert is executed first ?", title: "Question", hideDelay: 2000 } ::: Question
 
-wait: 1000
+wait: 500
 
-tooltip: { text: "The setTimeout function is called", pos: "0:5", wait: 4000 } ::: Code analysis
+tooltip: { text: "Let's understand this code together", pos: "0:0", wait: 2000 } ::: Code analysis
 
-wait: 1000
+tooltip: { text: "The setTimeout function is called", pos: "0:5", wait: 2000 }
 
-tooltip : { text: "A callback function passed to setTimeout", pos: "0:15", wait: 4000 }
+tooltip : { text: "A callback function is passed to setTimeout", pos: "0:15", wait: 2000 }
 
-wait: 1000
+tooltip: { text: "The callback should execute this...", pos: "2:4", wait: 2000 }
 
-tooltip: { text: "The callback should execute this...", pos: "2:4", wait: 4000 }
+tooltip: { text: "... after 1 second", pos: "4:5", wait: 2000 }
 
-wait: 1000
+tooltip: { text: "Press 'Execute' to see code in action", pos: "6:28", wait: 2000 }
 
-tooltip: { text: "... after 1 second", pos: "4:5", wait: 4000 }
 </textarea>
 
             </div>
@@ -129,17 +130,17 @@ tooltip: { text: "... after 1 second", pos: "4:5", wait: 4000 }
             </div>
 
             <div class="step" id="callbacks-pyramid" data-x="9000" data-y="0">
-                <h2>The callbacks pyramid</h2>
+                <h2>The callbacks pyramid <span class="subheader">aka Pyramid of Doom®</span></h2>
                 <hr>
-                <button class="button small radius success" id='callbacks-pyramid-button'>Play</button>
-<textarea name="callbacks-pyramid-movie" data-cm-mode="text/javascript" id="callbacks-pyramid-movie" cols="100" rows="30">
+                <button class="button radius success" id='callbacks-pyramid-button'>Play</button>
+<textarea data-cm-theme="solarized" name="callbacks-pyramid-movie" data-cm-mode="text/javascript" id="callbacks-pyramid-movie" cols="100" rows="30">
   |
 @@@
 type: { text: "ajaxRequest(url, function(err, response) {\n\n" } ::: Typing code
 
 run: { command: "indentAuto", beforeDelay: 0 }
 
-type: { text: "if (err) throw(err); // Custom error management\n\n" }
+type: { text: "if (err) errorHandler(err); // Custom error management\n\n" }
 
 run: { command: "indentAuto", beforeDelay: 0 }
 
@@ -151,7 +152,7 @@ type: { text: "saveSomewhere(coolResponse, function(err, dbHandler) {\n\n" }
 
 run: { command: "indentAuto", beforeDelay: 0 }
 
-type: { text: "if (err) throw(new Error('shit not saved'));\n\n" }
+type: { text: "if (err) errorHandler(new Error('shit not saved'));\n\n" }
 
 run: { command: "indentAuto", beforeDelay: 0 }
 
@@ -159,7 +160,7 @@ type: { text: "dbHandler.getSomeData(condition, function(err, results) {\n\n" }
 
 run: { command: "indentAuto", beforeDelay: 0 }
 
-type: { text: "if (err) throw(new Error('Lost'));\n\n" }
+type: { text: "if (err) errorHandler(new Error('Lost'));\n\n" }
 
 run: { command: "indentAuto", beforeDelay: 0 }
 
@@ -183,7 +184,7 @@ type: { text: "// Can't use this part of code" } ::: Problem : unusable part of 
 </textarea>
 
             </div>
-<!-- Angulars.js == async.auto -->
+
             <div class="step" id="the-problem-2" data-x="10500" data-y="0">
                 <h2>The problem (2/2)</h2>
                 <ul>
@@ -195,23 +196,24 @@ type: { text: "// Can't use this part of code" } ::: Problem : unusable part of 
 
             <div class="step" id="async-to-the-rescue" data-x="12000" data-y="0">
                 <h2 class="text-center">async.js to the rescue</h2>
-                <h3>The toolbox to manage any asynchronous code flow</h3>
+                <h3 class="text-center">The toolbox to manage any asynchronous code flow</h3>
             </div>
 
             <div class="step" id="async-each" data-x="13500" data-y="0">
                 <h2>async.each</h2>
                 <p>Equivalent of <kbd>Array.forEach</kbd> with asynchronous iterations.</p>
-<textarea name="each-movie" data-cm-mode="text/javascript" id="each-movie" cols="100" rows="30">
+                <button class="button radius success" id='each-button'>Play</button>
+<textarea data-cm-theme="solarized" name="each-movie" data-cm-mode="text/javascript" id="each-movie" cols="100" rows="30">
 var ids = [1, 3, 22, 89];
-async.each(ids, function(id, callback) {
+async.each(ids, function(id, next) {
     var url = "http://example.com/post/" + id;
     $.ajax(url)
         .fail(function(jqXHR, textStatus, err) {
-            callback(err); // exit the loop and move to the final callback
+            next(err); // exit the loop and move to the final callback
         })
         .done(function(data) {
             process(data);
-            callback(); // or callback(null) -> next loop iteration
+            next(); // or next(null) -> next loop iteration
         });
 }, function(err) {
     // Always manage errors
@@ -220,23 +222,40 @@ async.each(ids, function(id, callback) {
     // Continue after all Ajax requests succeeded
     // ...
 });
+@@@
+tooltip: { text: "async.each iterates through the `ids` array", pos: "0:15", hideDelay: 2000} ::: Iteration
+
+tooltip: { text: "Each `id` is passed through an iterator...", pos: "1:20", hideDelay: 2000}
+
+tooltip: { text: "which is passed a callback by async", pos: "1:31", hideDelay: 2000}
+
+tooltip: { text: "When the callback is called with an error...", pos: "5:14", hideDelay: 2000}
+
+tooltip: { text: "...the loop exits and moves to the final callback", pos: "11:8", hideDelay: 2000}
+
+tooltip: { text: "When called without params, it moves to the next loop iteration", pos: "9:15", hideDelay: 2000}
+
+tooltip: { text: "Nothing guarantees the order of execution of loop iterations", pos: "1:20", hideDelay: 2000} ::: Order
+
+tooltip: { text: "Ajax responses may arrive and be processed in any order", pos: "3:8", hideDelay: 2000}
 </textarea>
             </div>
 
             <div class="step" id="async-map" data-x="15000" data-y="0">
                 <h2>async.map</h2>
                 <p>Equivalent of <kbd>Array.map</kbd> with asynchronous transformations</p>
-<textarea name="map-movie" data-cm-mode="text/javascript" id="map-movie" cols="100" rows="30">
+                <button class="button radius success" id='map-button'>Play</button>
+<textarea data-cm-theme="solarized" name="map-movie" data-cm-mode="text/javascript" id="map-movie" cols="100" rows="30">
 var ids = [1, 3, 22, 89];
-async.map(ids, function(id, callback) {
+async.map(ids, function(id, next) {
     var url = "http://example.com/post/" + id;
     $.ajax(url)
         .fail(function() {
-            callback(new Error("Something's wrong with " + url)); // exit the loop and move to the final callback
+            next(new Error("Something's wrong with " + url)); // exit the loop and move to the final callback
         })
         .done(function(data) {
             var post = process(data);
-            callback(null, post); // next loop transformation
+            next(null, post); // next loop transformation
         });
 }, function(err, results) {
     // Always manage errors
@@ -246,6 +265,16 @@ async.map(ids, function(id, callback) {
     // in the same order than the `ids` array
     // ...
 });
+@@@
+tooltip: { text: "async.map is passed an array...", pos: "1:13", HideDelay: 2000 } ::: Transformation
+
+tooltip: { text: "...and an async tranformation function...", pos: "1:19", HideDelay: 2000 }
+
+tooltip: { text: "...and will return an array.", pos: "11:21", HideDelay: 2000 }
+
+tooltip: { text: "The transformation function can be executed in any order...", pos: "3:8", HideDelay: 2000 } ::: Results order
+
+tooltip: { text: "...but the results array is guaranteed to have the same order than the input one.", pos: "11:21", HideDelay: 2000 }
 </textarea>
             </div>
 
@@ -260,18 +289,80 @@ async.map(ids, function(id, callback) {
                 <p>Check the API, you <em>will</em> find something for your use case</p>
             </div>
 
-            <div class="step" id="async-auto" data-x="18000" data-y="0">
+            <div class="step" id="async-auto-killer-feature" data-x="18000" data-y="0">
                 <div class="text-center">
                     <h2><kbd>async.auto</kbd></h2>
                     <h2 class="subheader">THE killer feature</h2>
                 </div>
             </div>
 
-            <div class="step" id="async-auto-2" data-x="19500" data-y="0">
+            <div class="step" id="async-auto-wats-dis" data-x="19500" data-y="0">
                 <h2>What's <kbd>async.auto</kbd> ?</h2>
+                <h4><strong>A simple way to describe an asynchronous dependency graph.</strong></h4>
+                <ul>
+                    <li>Helps writing an asynchronous multi-steps algorithm</li>
+                    <li>Helps managing dependencies between those steps</li>
+                    <li>Manages the order of steps</li>
+                    <li>Gives you the results of all steps at the end</li>
+                </ul>
             </div>
 
-            <div class="step" id="the-end" data-x="21000" data-y="0">
+            <div class="step" id="async-auto-example" data-x="21000" data-y="0">
+                <h2><kbd>async.auto</kbd> in action</h2>
+                <button class="button radius success" id='async-auto-button'>Play</button>
+<textarea data-cm-theme="solarized" name="async-auto-movie" data-cm-mode="text/javascript" id="async-auto-movie" cols="100" rows="30">
+async.auto({
+  posts: function(next) {
+    $.ajax(url, function(err, results) {
+        if(err) return next(err);
+        next(null, results);
+    });
+  },
+  coolPosts: ['posts', function(next, results) {
+    var coolPosts = preparePosts(resulsts.posts);
+  }],
+  freeBeer: function(next) {
+    freeBeer4All();
+  }
+}, function(err, results) {
+  if (err) return errorHandler(err);
+
+  // Use results
+  results.posts;
+  results.coolPosts;
+  results.freeBeer;
+@@@
+tooltip: { text: "Call async.auto with an object parameter", pos: "0:8", hideDelay: 2000 } ::: Steps
+
+tooltip: { text: "Each key-value of this object...", pos: "1:5", hideDelay: 2000 }
+
+tooltip: { text: "...is a step of the async algorithm...", pos: "7:5", hideDelay: 2000 }
+
+tooltip: { text: "...where the key names the step.", pos: "10:5", hideDelay: 2000 }
+
+tooltip: { text: "Each step is a function which is passed a callback by async", pos: "1:23", hideDelay: 2000 }
+
+tooltip: { text: "As usual, if something goes wrong the callback should be called with the error", pos: "3:34", hideDelay: 2000 }
+
+tooltip: { text: "Otherwise pass `null` as the error and the data you need for others steps", pos: "4:27", hideDelay: 3000 }
+
+tooltip: { text: "Dependencies are described using an array syntax...", pos: "7:14", hideDelay: 2000 } ::: Dependencies
+
+tooltip: { text: "...where the string(s) is(are) the dependencie(s) of the current step.", pos: "7:18", hideDelay: 2000 }
+
+tooltip: { text: "We can use the results of dependencies as they're already finished", pos: "8:45", hideDelay: 3000 }
+
+tooltip: { text: "The optional final callback is passed the results of all steps", pos: "13:21", hideDelay: 2000 } ::: Final callback
+</textarea>
+            </div>
+
+            <div class="step" id="dont-mess-results" data-x="22500" data-y="0">
+                <h2><kbd>async.auto</kbd>'s pro tip®</h2>
+                <h3 class="subheader"><strong>Don't</strong> mess with the <kbd>results</kbd> variable.</h3>
+                <h3 class="subheader">Use it, <em>don't</em> change it. You've been warned.</h3>
+            </div>
+
+            <div class="step" id="the-end" data-x="24000" data-y="0">
                 <h2>That's all folks ! Questions ?</h2>
                 <hr>
                 <p>async.js : <a href="https://github.com/caolan/async">https://github.com/caolan/async</a></p>

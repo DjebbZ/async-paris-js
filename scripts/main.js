@@ -8,7 +8,8 @@
     'async-callback',
     'callbacks-pyramid',
     'each',
-    'map'
+    'map',
+    'async-auto'
   ]).forEach(function(step) {
 
     var movie = CodeMirror.movie(step + '-movie'),
@@ -26,11 +27,11 @@
           this.innerHTML = 'Pause';
         }
       });
+      movie.on('stop', function() {
+        playBtn.innerHTML = 'Play';
+      });
     }
 
-    movie.on('stop', function() {
-      button.innerHTML = 'Play';
-    });
 
     // Execute code from a Code Mirror editor
     if (execBtn) {
